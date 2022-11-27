@@ -8,21 +8,32 @@ export default {
 
             username: "",
             password: "",
-
         }
     },
     methods: {
-
-
-        async handleSubmit() {
+        async loginSubmit() {
             //逻辑判定
-            const response = axios.post('login', {
-                'username': this.username,
+            const response = axios.post('login', { //请统一http地址
+                'username': this.username, //uni
                 'password': this.password
             })
-
-            localStorage.setItem('token', response.data.token)
-
+            .then(response => {
+            // JSON responses are automatically parsed.
+            // this.posts = response.data.total
+                if(response.data.token == ""){
+                    alert("Input Valid Username/Password")
+                } else {
+                    localStorage.setItem('token', response.data.token) // this is a client? or a server??
+                    localStorage.setItem('username', this.username)
+                    // shouldn't that be sb's token?
+                    alert("Success!")
+                }
+            })
+            .catch(e => {
+            this.errors.push(e)//console
+            })
+            //
+            
         }
     }
 }
@@ -35,16 +46,13 @@ export default {
     <p>
         Username
     </p>
-        <input v-model="text">
+        <input v-model="username">
     <p>
         Password
     </p>
         <input v-model="password">
-    <p>
-        Reinput Password
-    </p>
-        <input v-model="password1">
+
+    <button @click="loginSubmit"> Login</button>
     <body>{{text}}</body>
-    <button @click="finalCheck"> Register</button>
 
 </template>

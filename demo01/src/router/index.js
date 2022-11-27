@@ -3,6 +3,10 @@ import HomeView from '../views/HomeView.vue'
 import ApiView from '../views/ApiView.vue'
 import RegisterView from '../views/RegisterView.vue'
 import LoginView from '../views/LoginView.vue'
+import CommentView from '../views/CommentView.vue'
+import SearchView from '../views/SearchView.vue'
+import ScoreView from '../views/ScoreView.vue'
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -33,6 +37,22 @@ const router = createRouter({
       path: '/login',
       name: 'login',
       component: LoginView
+    },
+    {
+      path: '/comment',
+      name: 'comment',
+      component: CommentView
+    },
+    {
+      path: '/search',
+      name: 'search',
+      component: SearchView
+    }
+    ,
+    {
+      path: '/score/:id',
+      name: 'professorscore',
+      component: ScoreView
     }
   ]
 })

@@ -1,6 +1,6 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from '@/components/HelloWorld.vue'
+// import HelloWorld from '@/components/HelloWorld.vue'
 </script>
 
 <template>
@@ -9,23 +9,30 @@ import HelloWorld from '@/components/HelloWorld.vue'
   <RouterLink to="/" >Home</RouterLink>
   <RouterLink to="/about" style="margin-left:100px">About</RouterLink>
   <RouterLink to="/api" style="margin-left:100px">API</RouterLink>
-  <RouterLink to="/register" style="margin-left:400px">Register</RouterLink>
+  <RouterLink to="/register" style="margin-left:100px">Register</RouterLink>
+  <RouterLink to="/login" style="margin-left:100px">Login</RouterLink>
+  <RouterLink to="/comment" style="margin-left:100px">Rate/Comment</RouterLink>
+  <RouterLink to="/search" style="margin-left:100px">Search</RouterLink>
+  <RouterLink to="/score/0" style="margin-left:100px">ScoreSample</RouterLink>
+  <!-- <RouterLink to="/writeblog" style="margin-left:100px">WriteBlog</RouterLink> -->
 </header>
 
 <nav>
 
-  London<br>
-  Paris<br>
-  Tokyo<br>
+  ?? University<br>
+  2022 Fall<br>
+  Professor<br>
+  Student<br>
 
 </nav>
 <section>
 
   <RouterView />
 </section>
-<footer>
+
+<!-- <footer>
   this is a demo  
-</footer>
+</footer> -->
 
 </template>
 
