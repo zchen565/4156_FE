@@ -5,7 +5,10 @@ import RegisterView from '../views/RegisterView.vue'
 import LoginView from '../views/LoginView.vue'
 import CommentView from '../views/CommentView.vue'
 import SearchView from '../views/SearchView.vue'
-import ScoreView from '../views/ScoreView.vue'
+import ProfessorScoreView from '../views/ProfessorScoreView.vue'
+//
+import WriteBlogView from '../views/WriteBlogView.vue'
+import ProfessorPageView from '../views/ProfessorPageView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -52,8 +55,20 @@ const router = createRouter({
     {
       path: '/score/:id',
       name: 'professorscore',
-      component: ScoreView
+      component: ProfessorScoreView
     }
+    ,
+    {
+      path: '/writeblog',
+      name: 'writeblog',
+      component: WriteBlogView
+    },
+    {
+      path: '/page/:id',
+      name: 'professorpage',
+      component: ProfessorPageView
+    }
+
   ]
 })
 
