@@ -4,7 +4,7 @@ export default {
 
     data (){
         return {
-            _message : "User Registration",
+            _message : "User Login",
             text: "xxxxxx",
             username: "",
             password: "",
@@ -20,9 +20,10 @@ export default {
             .then(response => {
             // JSON responses are automatically parsed.
             // this.posts = response.data.total
-                if(response.data.token == ""){
-                    alert("Input Valid Username/Password")
-                } else {
+            if(response.data.access_token == ""){
+                alert("Input Valid Username/Password")
+            } else {
+                    this.text = response.data.access_token
                     localStorage.setItem('token', response.data.token) // this is a client? or a server??
                     localStorage.setItem('username', this.username)
                     // shouldn't that be sb's token?

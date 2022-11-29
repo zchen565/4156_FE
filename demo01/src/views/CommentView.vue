@@ -29,7 +29,7 @@ export default{
                 return
             }
 
-            axios.post('/rateprofessor', {'username':localStorage.getItem('username'), 
+            axios.post('http://20.127.204.67:30005//rateprofessor', {'username':localStorage.getItem('username'), 
                                         'token': localStorage.getItem('token'),
                                         'professor': this.name,
                                         'score': this.score,
