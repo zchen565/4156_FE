@@ -6,7 +6,7 @@ export default {
     data (){
         return {
             _message : "User Registration",
-            text: "",
+            text: "xxxxxxxxx",
             username: "",
             password: "",
             password1: ""
@@ -31,9 +31,24 @@ export default {
             //逻辑判定
             //跳转或者响应
             if (this.password == this.password1){
-                axios.post('/register',{'username':this.username, 'password':this.password})
-                //跳转
-                this.$router.push('/login')
+                axios.post("http://20.127.204.67:30005/Register",{"username":this.username, "password":this.password})
+                .then(response => {
+            // JSON responses are automatically parsed.
+            // this.posts = response.data.total
+                this.text = response.data
+                if(response.data.token == ""){
+                    alert("Input Valid Username/Password")
+                } else {
+                    localStorage.setItem('token', response.data.token) // this is a client? or a server??
+                    localStorage.setItem('username', this.username)
+                    // shouldn't that be sb's token?
+                    alert("Success!")
+                }
+            })
+            .catch(e => {
+            this.errors.push(e)//console
+            })
+                // this.$router.push('/login')
             }
             else {
                 alert('passwords should be same')
@@ -51,7 +66,7 @@ export default {
     <p>
         Username
     </p>
-        <input v-model="text">
+        <input v-model="username">
     <p>
         Password
     </p>
