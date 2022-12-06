@@ -9,7 +9,7 @@ export default {
             username: "oooooo",
             password: "",
             token: "xxxx",
-            logout: ""
+            logoutinfo: ""
         }
     },
     methods: {
@@ -24,6 +24,10 @@ export default {
             // this.posts = response.data.total
             if(response.data.access_token == "" || response.data.access_token == null){
                 alert("Input Valid Username/Password")
+                return
+            } else if (response.data.access_token == "Already logged in"){
+                alert("Already Logged In")
+                return
             } else {
                     this.text = response.data
                     localStorage.setItem('token', response.data.access_token) // this is a client? or a server??
@@ -45,7 +49,11 @@ export default {
                 'access_token': localStorage.getItem("token")
             })
             .then(response => {
-
+                if(response.data.logout == "success"){
+                    alert("back-end logged out!")
+                } else {
+                    alert("sth wrong happend in log out, front-end will erase user")
+                }
             })
             .catch(e => {
             this.errors.push(e)//console
@@ -91,9 +99,9 @@ export default {
 
     <button @click="printshit"> Print2test </button>
     <P>
-        
+        {{logoutinfo}}
     </P>
-    
+
 
 
 </template>

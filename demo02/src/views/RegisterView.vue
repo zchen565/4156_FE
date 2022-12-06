@@ -36,13 +36,15 @@ export default {
             // JSON responses are automatically parsed.
             // this.posts = response.data.total
                 this.text = response.data
-                if(response.data.access_token == ""){
-                    alert("Input Valid Username/Password")
-                } else {
-                    localStorage.setItem('token', response.data.access_token) // this is a client? or a server??
-                    localStorage.setItem('username', this.username)
-                    alert("Success!")
-                }
+                // if(response.data.access_token == "" || response.data.access_token == null){
+                //     alert("Input Valid Username/Password")
+                // } else {
+                //     // localStorage.setItem('token', response.data.access_token) // this is a client? or a server??
+                //     localStorage.setItem('username', this.username)
+                //     alert("Success!")
+                // }
+                // localStorage.setItem('username', this.username)
+
             })
             .catch(e => {
             this.errors.push(e)//console

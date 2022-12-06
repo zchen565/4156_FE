@@ -83,7 +83,7 @@ export default{
     <p>{{email}}</p>
     <p>{{teaching}}</p> -->
     <!-- score is from get_faculty_rating -->
-    <h2>{{score}}</h2>
+    <!-- <h2>{{score}}</h2> -->
 
     <h3>Comments</h3>
     <p>{{this.text}}</p>

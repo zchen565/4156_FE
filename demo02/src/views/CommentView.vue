@@ -8,29 +8,31 @@ export default{
             uni: "",
             score: "",
             comment: "",
-            isstudent: ""
+            isstudent: "",
+            loggedin: false
         }
     },
     methods: {
-        isStudent() { // this should be universal for api that needs authentication
-            alert("User: " + localStorage.getItem('username'))
-            alert("Token: " + localStorage.getItem('token'))
-            axios.post('http://20.127.204.67:30005/is_logged_in',{ // need to change here
-                'username':localStorage.getItem('username'), 
-                "access_token": localStorage.getItem('token'), 
-            }) //validate user's status
-            .then(response => {
-                this.isStudent = response.data
-            if(response.data.status != "success"){
-                alert("Only login user can post comment")
-                return false
-            }
-            return true
-            })
-            .catch(e => {
-            this.errors.push(e)//console
-            })
-        },
+        // isStudent() { // this should be universal for api that needs authentication
+        //     // alert("User: " + localStorage.getItem('username'))
+        //     // alert("Token: " + localStorage.getItem('token'))
+        //     axios.post('http://20.127.204.67:30005/is_logged_in',{ // need to change here
+        //         'username':localStorage.getItem('username'), 
+        //         "access_token": localStorage.getItem('token'), 
+        //     }) //validate user's status
+        //     .then(response => {
+        //         this.isStudent = response.data
+        //     if(response.data.status != "success"){
+        //         alert("Only login user can post comment")
+        //         return false
+        //     }
+        //     alert("logged in !")
+        //     return true
+        //     })
+        //     .catch(e => {
+        //     this.errors.push(e)//console
+        //     })
+        // },
         postComment() {
             if(this.uni.trim() == ""){
                 alert("Please input a valid professor name")
@@ -49,21 +51,42 @@ export default{
                 return
             }
 
-            // 'username':localStorage.getItem('username'), 
-            // 'token': localStorage.getItem('token'), 
-            flag = this.isStudent()
-            if(!flag){
-                alert("You are not a student enrolled!")
-                return
-            }
+            // flag = this.isStudent()
+            // if(!flag){
+            //     alert("You are not a student enrolled!")
+            //     return
+            // }
+            alert('user: '+localStorage.getItem('username'))
+            axios.post('http://20.127.204.67:30005/is_logged_in',{ // need to change here
+                'username':localStorage.getItem('username'), 
+                "access_token": localStorage.getItem('token'), 
+            }) //validate user's status
+            .then(response => {
+                this.isStudent = response.data
+                if(response.data.status != "success"){
+                    alert("Only logined user can post comment")
+                    this.loggedin = false
+                    return
+                } else{
+                    this.loggedin = true
+                }
 
+            alert("logged in !")
+            })
+            .catch(e => {
+            this.errors.push(e)//console
+            })
+
+            // alert("entered_shit")
+            if(!this.loggedin){
+                return 
+            }
             axios.post('http://20.127.204.67:8083/create_faculty_rating', {
                     "uni":this.uni,
                     "score": this.score,
                     "comment" : this.comment
                 })
             .then(response => {
-
                 this.text = response.data
                 if(text != "" || text != null)
                     alert("Success")
