@@ -1,6 +1,13 @@
 # 4156_FE
 This is the front end server for 4156 project
 
+# Instruction
+https://nodejs.org/en/download/
+download the mac/windows version
+GO TO demo02 directory    
+use demo02  
+npm install
+npm run dev
 
 ## how to change/edit demo01
 1. src/router/index.js
