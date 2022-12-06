@@ -2,6 +2,14 @@
 import axios from "axios"
 
 export default{
+    created() {
+        this.isStudent()
+        // if(this.loggedin){
+        //     alert("Please Loggin")
+        //     this.$router.push('/login')
+        // }
+        
+    },
     data() {
         return {
             text: "xxxxxxxxxxxxxx",
@@ -13,27 +21,30 @@ export default{
         }
     },
     methods: {
-        // isStudent() { // this should be universal for api that needs authentication
-        //     // alert("User: " + localStorage.getItem('username'))
-        //     // alert("Token: " + localStorage.getItem('token'))
-        //     axios.post('http://20.127.204.67:30005/is_logged_in',{ // need to change here
-        //         'username':localStorage.getItem('username'), 
-        //         "access_token": localStorage.getItem('token'), 
-        //     }) //validate user's status
-        //     .then(response => {
-        //         this.isStudent = response.data
-        //     if(response.data.status != "success"){
-        //         alert("Only login user can post comment")
-        //         return false
-        //     }
-        //     alert("logged in !")
-        //     return true
-        //     })
-        //     .catch(e => {
-        //     this.errors.push(e)//console
-        //     })
-        // },
+        isStudent() { // this should be universal for api that needs authentication
+
+            axios.post('http://20.127.204.67:30005/is_logged_in',{ // need to change here
+                'username':localStorage.getItem('username'), 
+                "access_token": localStorage.getItem('token'), 
+            }) //validate user's status
+            .then(response => {
+                this.isStudent = response.data
+            if(response.data.status == "success"){
+                alert("You are logged in")
+                this.loggedin = true
+            }
+            })
+            .catch(e => {
+            this.errors.push(e)//console
+            })
+            
+        },
         postComment() {
+            if(!this.loggedin){
+                alert("you should log in !")
+                this.$router.push('/login')
+                return
+            }
             if(this.uni.trim() == ""){
                 alert("Please input a valid professor name")
                 return
@@ -56,31 +67,34 @@ export default{
             //     alert("You are not a student enrolled!")
             //     return
             // }
+            // if(this.loggedin != "true"){
+            //     alert("You are not logged in")
+            //     return 
+            // }
             alert('user: '+localStorage.getItem('username'))
-            axios.post('http://20.127.204.67:30005/is_logged_in',{ // need to change here
-                'username':localStorage.getItem('username'), 
-                "access_token": localStorage.getItem('token'), 
-            }) //validate user's status
-            .then(response => {
-                this.isStudent = response.data
-                if(response.data.status != "success"){
-                    alert("Only logined user can post comment")
-                    this.loggedin = false
-                    return
-                } else{
-                    this.loggedin = true
-                }
 
-            alert("logged in !")
-            })
-            .catch(e => {
-            this.errors.push(e)//console
-            })
+            // axios.post('http://20.127.204.67:30005/is_logged_in',{ // need to change here
+            //     'username':localStorage.getItem('username'), 
+            //     "access_token": localStorage.getItem('token'), 
+            // }) //validate user's status
+            // .then(response => {
+            //     this.isStudent = response.data
+            //     if(response.data.status != "success"){
+            //         alert("Only logined user can post comment")
+            //         this.loggedin = false
+            //         return
+            //     } else{
+            //         this.loggedin = true
+            //     }
+
+            // alert("logged in !")
+            // })
+            // .catch(e => {
+            // this.errors.push(e)//console
+            // })
 
             // alert("entered_shit")
-            if(!this.loggedin){
-                return 
-            }
+
             axios.post('http://20.127.204.67:8083/create_faculty_rating', {
                     "uni":this.uni,
                     "score": this.score,
@@ -104,6 +118,7 @@ export default{
 <template>
 
     <h1>Rate My Professor</h1>
+    {{this.loggedin}}
     <p>
         uni <!--this should be a down list-->
     </p>

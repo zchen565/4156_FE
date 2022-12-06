@@ -4,8 +4,8 @@ import { RouterLink, RouterView } from 'vue-router'
 export default{
   // for test
   // created(){
-  //   localStorage.setItem('username','xxx') 
-  //   localStorage.setItem('token','oooo')
+  //   localStorage.setItem('username','') 
+  //   localStorage.setItem('token','')
   // },
   data() {
         return {
