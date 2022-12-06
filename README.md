@@ -1,12 +1,14 @@
 # 4156_FE
 This is the front end server for 4156 project
 
-# Instruction
+# Instruction USE DEMO02
 https://nodejs.org/en/download/
 download the mac/windows version
+
 GO TO demo02 directory    
-use demo02  
+
 npm install
+
 npm run dev
 
 ## how to change/edit demo01
