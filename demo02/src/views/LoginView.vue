@@ -8,7 +8,8 @@ export default {
             text: "empty_text",
             username: "oooooo",
             password: "",
-            token: "xxxx"
+            token: "xxxx",
+            logout: ""
         }
     },
     methods: {
@@ -39,6 +40,16 @@ export default {
             
         },
         logout(){
+            axios.post('http://20.127.204.67:30005/logout', { //请统一http地址
+                'username': localStorage.getItem("username"), //uni
+                'access_token': localStorage.getItem("token")
+            })
+            .then(response => {
+
+            })
+            .catch(e => {
+            this.errors.push(e)//console
+            })
             localStorage.setItem('username', "")
             localStorage.setItem('token', "") // this is a client? or a server??
             this.username = localStorage.getItem("username")
@@ -79,6 +90,10 @@ export default {
     <body>{{text}}</body>
 
     <button @click="printshit"> Print2test </button>
+    <P>
+        
+    </P>
+    
 
 
 </template>

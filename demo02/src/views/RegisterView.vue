@@ -36,12 +36,11 @@ export default {
             // JSON responses are automatically parsed.
             // this.posts = response.data.total
                 this.text = response.data
-                if(response.data.token == ""){
+                if(response.data.access_token == ""){
                     alert("Input Valid Username/Password")
                 } else {
-                    localStorage.setItem('token', response.data.token) // this is a client? or a server??
+                    localStorage.setItem('token', response.data.access_token) // this is a client? or a server??
                     localStorage.setItem('username', this.username)
-                    // shouldn't that be sb's token?
                     alert("Success!")
                 }
             })

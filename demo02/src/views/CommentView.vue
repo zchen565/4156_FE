@@ -7,25 +7,25 @@ export default{
             text: "xxxxxxxxxxxxxx",
             uni: "",
             score: "",
-            comment: ""
+            comment: "",
+            isstudent: ""
         }
     },
     methods: {
         isStudent() { // this should be universal for api that needs authentication
             alert("User: " + localStorage.getItem('username'))
             alert("Token: " + localStorage.getItem('token'))
-            axios.post('http://20.127.204.67:8083/create_faculty_rating',{ // need to change here
+            axios.post('http://20.127.204.67:30005/is_logged_in',{ // need to change here
                 'username':localStorage.getItem('username'), 
-                'token': localStorage.getItem('token'), 
+                "access_token": localStorage.getItem('token'), 
             }) //validate user's status
             .then(response => {
-
-            _status = response.data.status //
-                if(_status == false){
-                    alert("Only login user can post comment")
-                    return false
-                }
-                return true
+                this.isStudent = response.data
+            if(response.data.status != "success"){
+                alert("Only login user can post comment")
+                return false
+            }
+            return true
             })
             .catch(e => {
             this.errors.push(e)//console
@@ -95,6 +95,8 @@ export default{
         <input v-model="comment">
     
     <button @click="postComment"> post comment</button>
+    <br>
+    {{isstudent}}
     <br>
     {{text}}
     

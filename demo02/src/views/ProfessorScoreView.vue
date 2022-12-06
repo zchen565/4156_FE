@@ -40,78 +40,26 @@ export default{
         
     },
     methods: {
-        getPage(){
-            if(uni.trim() == ""){
-                alert("please enter a valid uni")
-                return
-            }
-            this.getComments()
-            this.getBasic()
-        },
-        async getComments() {
+
+        getComments() {
             
-            // 评论信息 》》》》》》》》
-            axios.post('http://20.127.204.67:8083/get_faculty_rating', {
-                    "uni":this.uni,
-                })
+            axios.get(`http://20.127.204.67:8083/get_faculty_rating?uni=${this.uni}`)
+            // axios.get('http://20.127.204.67:8083/get_faculty_rating?uni=x777')
             .then(response => {
-            // JSON responses are automatically parsed.
-                // _status = response.data.status // error code
-                // -1 unknown error
-                // 0 no such professor
-                // 1 success
-                
-                // switch (_status) {
-                //     case -1:{
-                //         alert("unknown error happend")
-                //         break
-                //     }
-                //     case 0: {
-                //         alert('no such professor')
-                //         break
-                //     }
-                //     case 1: {
-                //         prompt('Success!')
-                //         //show the motherfuckers !
-                //         this.comments = response.data.comments //是否要重新解析？？
-                //         //解析成对应的形式 
-                //         break
-                //     }
-                // }
-                this.comments = response.data.comments
+                // JSON responses are automatically parsed.
+                this.text = response.data
+                this.getComments()
+                // alert("I entered")
             })
             .catch(e => {
             this.errors.push(e)//console
             })
         },
-        async getBasic(){
-            axios.get('http://20.127.204.67:8083/get_faculty_info', {
-                    "uni":this.uni,
-                })
+        getBasic(){
+            axios.get(`http://20.127.204.67:8083/get_faculty_info?uni=${this.uni}`)
             .then(response => {
             // JSON responses are automatically parsed.
-                _status = response.data.status // error code
-                // -1 unknown error
-                // 0 no such professor
-                // 1 success
-                switch (_status) {
-                    case -1:{
-                        alert("unknown error happend")
-                        break
-                    }
-                    case 0: {
-                        alert('no such professor')
-                        break
-                    }
-                    case 1: {
-                        prompt('Success!')
-                        //show the motherfuckers !
-                        this.email = response.data.email 
-                        this.teaching = response.data.course
-                        this.score = response.data.score
-                        break
-                    }
-                }
+                this.basicinfo = response.data
             })
             .catch(e => {
             this.errors.push(e)//console
@@ -126,23 +74,26 @@ export default{
 <template>
 
     <input v-model="uni">
-    <button @click="getPage"> Professor Score</button>
+    <button @click="getComments"> Professor Score</button>
+    <button @click="getBasic"> Professor Info  </button>
     <h1>Professor UNI : {{uni}}</h1>
     <!-- <h2>UNI: {{ $route.params.id }}</h2> -->
     <p>{{basicinfo}}</p>
-    <p>{{name}}</p>
+    <!-- <p>{{name}}</p>
     <p>{{email}}</p>
-    <p>{{teaching}}</p>
+    <p>{{teaching}}</p> -->
     <!-- score is from get_faculty_rating -->
     <h2>{{score}}</h2>
 
     <h3>Comments</h3>
     <p>{{this.text}}</p>
-    <ul id="obj">
+
+
+    <!-- <ul id="obj">
         <li v-for="obj in comments">
             Score: {{obj.score}} <br>
             {{obj.comment}}
         </li>
-    </ul>
+    </ul> -->
     
 </template>
