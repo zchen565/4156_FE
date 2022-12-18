@@ -31,7 +31,7 @@ export default {
             //逻辑判定
             //跳转或者响应
             if (this.password == this.password1){
-                axios.post("http://20.127.204.67:30005/Register",{'username':this.username, 'password':this.password})
+                axios.post("http://localhost:30005/Register",{'username':this.username, 'password':this.password})
                 .then(response => {
             // JSON responses are automatically parsed.
             // this.posts = response.data.total

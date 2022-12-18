@@ -58,6 +58,10 @@ export default{
   <RouterLink to="/writeblog" style="margin-left:100px">WriteBlog</RouterLink>
   <RouterLink to="/score" style="margin-left:100px">ScoreSample</RouterLink>
   <RouterLink to="/page" style="margin-left:100px">PageSample</RouterLink>
+
+  <RouterLink to="/bid" style="margin-left:100px">Bid</RouterLink>
+  <RouterLink to="/get_bid" style="margin-left:100px">GetBid</RouterLink>
+  <RouterLink to="/search_bid" style="margin-left:100px">SearchBid</RouterLink>
 </header>
 
 <nav>

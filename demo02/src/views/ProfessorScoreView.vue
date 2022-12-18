@@ -43,7 +43,7 @@ export default{
 
         getComments() {
             
-            axios.get(`http://20.127.204.67:8083/get_faculty_rating?uni=${this.uni}`)
+            axios.get(`http://localhost:8083/get_faculty_rating?uni=${this.uni}`)
             // axios.get('http://20.127.204.67:8083/get_faculty_rating?uni=x777')
             .then(response => {
                 // JSON responses are automatically parsed.
@@ -56,7 +56,7 @@ export default{
             })
         },
         getBasic(){
-            axios.get(`http://20.127.204.67:8083/get_faculty_info?uni=${this.uni}`)
+            axios.get(`http://localhost:8083/get_faculty_info?uni=${this.uni}`)
             .then(response => {
             // JSON responses are automatically parsed.
                 this.basicinfo = response.data

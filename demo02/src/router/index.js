@@ -10,6 +10,10 @@ import ProfessorScoreView from '../views/ProfessorScoreView.vue'
 import WriteBlogView from '../views/WriteBlogView.vue'
 import ProfessorPageView from '../views/ProfessorPageView.vue'
 
+import BidView from '../views/BidView.vue'
+import GetBidView from '../views/GetBidView.vue'
+import SearchBidView from '../views/SearchBidView.vue'
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -69,6 +73,24 @@ const router = createRouter({
       path: '/page',
       name: 'professorpage',
       component: ProfessorPageView
+    },
+    {
+      // path: '/page/:id',
+      path: '/bid',
+      name: 'bid',
+      component: BidView
+    },
+    {
+      // path: '/page/:id',
+      path: '/get_bid',
+      name: 'getbid',
+      component: GetBidView
+    },
+    {
+      // path: '/page/:id',
+      path: '/search_bid',
+      name: 'searchbid',
+      component: SearchBidView
     }
 
   ]

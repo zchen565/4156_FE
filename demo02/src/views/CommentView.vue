@@ -23,7 +23,7 @@ export default{
     methods: {
         isStudent() { // this should be universal for api that needs authentication
 
-            axios.post('http://20.127.204.67:30005/is_logged_in',{ // need to change here
+            axios.post('http://localhost:30005/is_logged_in',{ // need to change here
                 'username':localStorage.getItem('username'), 
                 "access_token": localStorage.getItem('token'), 
             }) //validate user's status
@@ -95,7 +95,7 @@ export default{
 
             // alert("entered_shit")
 
-            axios.post('http://20.127.204.67:8083/create_faculty_rating', {
+            axios.post('http://localhost:8083/create_faculty_rating', {
                     "uni":this.uni,
                     "score": this.score,
                     "comment" : this.comment

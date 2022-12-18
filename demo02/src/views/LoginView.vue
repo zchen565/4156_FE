@@ -15,7 +15,7 @@ export default {
     methods: {
         async loginSubmit() {
             //逻辑判定
-            axios.post('http://20.127.204.67:30005/login', { //请统一http地址
+            axios.post('http://localhost:30005/login', { //请统一http地址
                 'username': this.username, //uni
                 'password': this.password
             })
@@ -44,7 +44,7 @@ export default {
             
         },
         logout(){
-            axios.post('http://20.127.204.67:30005/logout', { //请统一http地址
+            axios.post('http://localhost:30005/logout', { //请统一http地址
                 'username': localStorage.getItem("username"), //uni
                 'access_token': localStorage.getItem("token")
             })
