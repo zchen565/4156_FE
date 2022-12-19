@@ -9,14 +9,12 @@ export default{
         }
     },
     methods: {
-        async Bid() {
+        Apply() {
             
-            axios.post('http://localhost:8080/bid', {
-                'uni': localStorage.getItem("username"),
-                'course': this.course,
-                'quote': parseInt(this.quote),
-                'username': localStorage.getItem("username"),
-                'access_token': localStorage.getItem("token")
+            axios.post('http://20.84.85.127:5051/apply', {
+                'sender': this.sender,
+                'receiver': this.receiver,
+                'content': this.content
             })
             .then(response => {
                 console.log(response.data)
@@ -36,15 +34,19 @@ export default{
 <template>
 
     <p>
-        Course
+        Sender
     </p>
-        <input v-model="course">
+        <input v-model="sender">
     <p>
-        Quote
+        Receiver
     </p>
-        <input v-model="quote">
+        <input v-model="receiver">
+    <p>
+        Content
+    </p>
+        <input v-model="content">
     
-    <button @click="Bid"> Bid</button>
+    <button @click="Apply"> Apply</button>
 
     <p>{{body}}</p>
     
